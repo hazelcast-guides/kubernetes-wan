@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: hazelcast
-          image: hazelcast/hazelcast-enterprise:4.0
+          image: hazelcast/hazelcast-enterprise:4.1
           imagePullPolicy: IfNotPresent
           ports:
           - containerPort: 5701
