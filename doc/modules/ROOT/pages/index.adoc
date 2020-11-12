@@ -18,6 +18,7 @@ In this guide you will create two Hazelcast clusters and will set up WAN Replica
 
 This example focuses on the WAN Replication feature and assumes that you have some general knowledge about Hazelcast on Kubernetes. Here are some resources:
 
+* https://hazelcast.com/product-features/wan-replication/[Hazelcast WAN Replication]
 * https://github.com/hazelcast/hazelcast-kubernetes[Hazelcast Kubernetes README]
 * https://github.com/hazelcast/hazelcast-code-samples/blob/master/hazelcast-integration/kubernetes[Hazelcast Kubernetes Code Sample]
 * https://github.com/hazelcast/hazelcast-code-samples/blob/master/hazelcast-integration/kubernetes/samples/embedded[Hazelcast Kubernetes Embedded Code Sample]
@@ -152,3 +153,8 @@ hazelcast[default] > ns rep
 hazelcast[rep] > m.get key
 value
 ----
+
+== Summary
+
+In this example we have seen how to use Hazelcast WAN replication features that can be used to keep multiple Hazelcast clusters in sync. WAN replication can be very useful for https://hazelcast.com/resources/multi-cloud-deployments-run-hazelcast-anywhere-and-everywhere/[Multi-Cloud Deployments].
+
