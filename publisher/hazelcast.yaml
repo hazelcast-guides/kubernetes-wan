@@ -10,7 +10,7 @@ hazelcast:
       batch-publisher:
         my-publisher:
           cluster-name: dev
-          target-endpoints: 35.240.109.13 #EXTERNAL_IP_OF_RECEIVER_CLUSTER
+          target-endpoints: EXTERNAL_IP_OF_RECEIVER_CLUSTER
   map:
     rep:
       wan-replication-ref:
