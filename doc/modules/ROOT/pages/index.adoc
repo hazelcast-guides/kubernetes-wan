@@ -6,7 +6,7 @@
 
 = Hazelcast WAN Replication (Enterprise Only)
 
-This a complete example presenting how to set two Hazelcast clusters (deployed in two different Kubernetes environments) with the WAN Replication in between them.
+This is a complete example presenting how to set two Hazelcast clusters (deployed in two different Kubernetes environments) with the WAN Replication in between them.
 
 include::{templates-url}/link-to-repo.adoc[]
 
