@@ -1,8 +1,4 @@
 hazelcast:
-  network:
-    join:
-      kubernetes:
-        enabled: true
   wan-replication:
     my-wan-replication:
       batch-publisher:

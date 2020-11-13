@@ -39,13 +39,6 @@ Hazelcast uses Kubernetes API for the member discovery and it therefore requires
 (Receiver) $ kubectl apply -f rbac.yaml
 ----
 
-Then, you need to create a ConfigMap with the Hazelcast Configuration.
-
-[source, shell]
-----
-(Receiver) $ kubectl create configmap hazelcast-configuration --from-file=receiver/hazelcast.yaml
-----
-
 Then, create a secret with the Hazelcast Enterprise license key.
 
 [source, shell]
@@ -57,7 +50,7 @@ Now, you can create the cluster with the following command.
 
 [source, shell]
 ----
-(Receiver) $ kubectl apply -f statefulset.yaml
+(Receiver) $ kubectl apply -f receiver/statefulset.yaml
 ----
 
 [NOTE]
@@ -124,7 +117,7 @@ Finally, we can start the publisher Hazelcast cluster.
 
 [source, shell]
 ----
-(Publisher) $ kubectl apply -f statefulset.yaml
+(Publisher) $ kubectl apply -f publisher/statefulset.yaml
 ----
 
 Your two Hazelcast clusters are set up with the WAN Replication. Now, we can check if everything works correctly.
