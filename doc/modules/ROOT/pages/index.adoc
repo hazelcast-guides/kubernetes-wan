@@ -20,8 +20,8 @@ This example focuses on the WAN Replication feature and assumes that you have so
 
 * https://hazelcast.com/product-features/wan-replication/[Hazelcast WAN Replication]
 * https://github.com/hazelcast/hazelcast-kubernetes[Hazelcast Kubernetes README]
-* https://github.com/hazelcast/hazelcast-code-samples/blob/master/hazelcast-integration/kubernetes[Hazelcast Kubernetes Code Sample]
-* https://github.com/hazelcast/hazelcast-code-samples/blob/master/hazelcast-integration/kubernetes/samples/embedded[Hazelcast Kubernetes Embedded Code Sample]
+* https://guides.hazelcast.org/kubernetes/[Hazelcast Kubernetes Guide]
+* https://guides.hazelcast.org/kubernetes-embedded/[Hazelcast Kubernetes Embedded Guide]
 
 The example also assumes you have two running Kubernetes clusters, and the `kubectl` tool installed. For all the commands the indication (`Receiver`) means that `kubectl` uses the context of the receiver cluster, and the indication (`Publisher`) means that `kubectl` uses the context of the publisher cluster.
 
