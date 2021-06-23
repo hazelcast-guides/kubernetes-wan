@@ -129,7 +129,7 @@ Insert data into the publisher Hazelcast cluster
 [source, shell]
 ----
 (Publisher) $ kubectl exec -it hazelcast-0 -- /bin/bash
-# java -cp lib/hazelcast-enterprise-all*.jar com.hazelcast.client.console.ClientConsoleApp
+# bin/hazelcast console
 hazelcast[default] > ns rep
 namespace: rep
 hazelcast[rep] > m.put key value
@@ -141,7 +141,7 @@ Check that the data was replicated to the receiver Hazelcast cluster.
 [source, shell]
 ----
 (Receiver) $ kubectl exec -it hazelcast-0 -- /bin/bash
-# java -cp lib/hazelcast-enterprise-all*.jar com.hazelcast.client.console.ClientConsoleApp
+# bin/hazelcast console
 hazelcast[default] > ns rep
 hazelcast[rep] > m.get key
 value
