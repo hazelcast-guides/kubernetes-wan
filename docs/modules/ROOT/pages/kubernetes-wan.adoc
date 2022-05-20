@@ -2,14 +2,12 @@
 :templates-url: templates:ROOT:page$/
 :page-layout: tutorial
 :page-product: imdg
-:page-categories: WAN, Deployment, Kubernetes
+:page-categories: WAN, Deployment, Cloud Native
 :page-lang:
 :page-enterprise: true
 :page-est-time: 30 mins
 :framework: Kubernetes
-:description: In this tutorial, you will create two Hazelcast clusters in different Kubernetes environments and set up WAN Replication between them.
-
-== What You’ll Learn
+:description: Synchronize data in two Hazelcast clusters that are hosted in different Kubernetes environments, using WAN Replication.
 
 {description}
 
