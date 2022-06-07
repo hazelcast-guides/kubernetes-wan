@@ -1,33 +1,30 @@
-:github-address: https://github.com/hazelcast-guides/kubernetes-wan
+= Hazelcast WAN Replication in Kubernetes
 :templates-url: templates:ROOT:page$/
-:hazelcast: Hazelcast IMDG
+:page-layout: tutorial
+:page-product: imdg
+:page-categories: Deployment, Cloud Native
+:page-lang:
+:page-enterprise: true
+:page-est-time: 30 mins
 :framework: Kubernetes
+:description: Synchronize data in two Hazelcast clusters that are hosted in different Kubernetes environments, using WAN Replication.
 
+{description}
 
-= Hazelcast WAN Replication (Enterprise Only)
+== Before you Begin
 
-This is a complete example presenting how to set two Hazelcast clusters (deployed in two different Kubernetes environments) with the WAN Replication in between them.
-
-include::{templates-url}/link-to-repo.adoc[]
-
-== What You’ll Learn
-
-In this guide you will create two Hazelcast clusters and will set up WAN Replication between them.
-
-== Introduction
-
-This example focuses on the WAN Replication feature and assumes that you have some general knowledge about Hazelcast on Kubernetes. Here are some resources:
+This tutorial focuses on the WAN Replication feature and assumes that you have some general knowledge about Hazelcast in Kubernetes. Here are some resources:
 
 * https://hazelcast.com/product-features/wan-replication/[Hazelcast WAN Replication]
 * https://github.com/hazelcast/hazelcast-kubernetes[Hazelcast Kubernetes README]
-* xref:kubernetes:ROOT:index.adoc[Hazelcast on Kubernetes Guide]
-* xref:kubernetes-embedded:ROOT:index.adoc[Embedded Hazelcast on Kubernetes Guide]
+* xref:kubernetes.adoc[]
+* xref:kubernetes-embedded.adoc[]
 
-The example also assumes you have two running Kubernetes clusters, and the `kubectl` tool installed. For all the commands the indication (`Receiver`) means that `kubectl` uses the context of the receiver cluster, and the indication (`Publisher`) means that `kubectl` uses the context of the publisher cluster.
+The tutorial also assumes that you have two running Kubernetes clusters, and the `kubectl` tool installed. For all the commands the term _receiver_ means that `kubectl` uses the context of the receiver cluster, and the term _publisher_ means that `kubectl` uses the context of the publisher cluster.
 
 [NOTE]
 ====
-This Code Sample presents WAN Replication via LoadBalancer, which may result in the communication over only one of the target members. If you need higher performance, please check out xref:kubernetes-external-client:ROOT:index.adoc[External Smart Client] and use such a configuration in the WAN Replication part.
+The code samples present WAN Replication via LoadBalancer, which may result in the communication over only one of the target members. If you need higher performance, see xref:kubernetes-external-client.adoc[External Smart Client] and use such a configuration in the WAN Replication part.
 ====
 
 == 1. Create Receiver Cluster
@@ -149,5 +146,5 @@ value
 
 == Summary
 
-In this example we have seen how to use Hazelcast WAN replication features that can be used to keep multiple Hazelcast clusters in sync. WAN replication can be very useful for https://hazelcast.com/resources/multi-cloud-deployments-run-hazelcast-anywhere-and-everywhere/[Multi-Cloud Deployments].
+In this tutorial, you have seen how to use Hazelcast WAN replication features that can be used to keep multiple Hazelcast clusters in sync. WAN replication can be very useful for https://hazelcast.com/resources/multi-cloud-deployments-run-hazelcast-anywhere-and-everywhere/[Multi-Cloud Deployments].
 
