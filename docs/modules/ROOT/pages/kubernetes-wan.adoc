@@ -16,7 +16,7 @@
 This tutorial focuses on the WAN Replication feature and assumes that you have some general knowledge about Hazelcast in Kubernetes. Here are some resources:
 
 * https://hazelcast.com/product-features/wan-replication/[Hazelcast WAN Replication]
-* https://github.com/hazelcast/hazelcast-kubernetes[Hazelcast Kubernetes README]
+* https://docs.hazelcast.com/hazelcast/latest/kubernetes/deploying-in-kubernetes[Hazelcast Kubernetes Doc]
 * xref:kubernetes.adoc[]
 * xref:kubernetes-embedded.adoc[]
 
@@ -33,14 +33,14 @@ Hazelcast uses Kubernetes API for the member discovery and it therefore requires
 
 [source, shell]
 ----
-(Receiver) $ kubectl apply -f rbac.yaml
+(Receiver) $ kubectl apply -f https://raw.githubusercontent.com/hazelcast/hazelcast/master/kubernetes-rbac.yaml
 ----
 
 Then, create a secret with the Hazelcast Enterprise license key.
 
 [source, shell]
 ----
-(Receiver) $ kubectl create secret generic hz-license-key --from-literal license=<hz-license-key>
+(Receiver) $ kubectl create secret generic hz-license-key --from-literal key=<hz-license-key>
 ----
 
 Now, you can create the cluster with the following command.
@@ -81,7 +81,7 @@ Again, we need to grant Kubernetes API resource permissions.
 
 [source, shell]
 ----
-(Publisher) $ kubectl apply -f rbac.yaml
+(Publisher) $ kubectl apply -f https://raw.githubusercontent.com/hazelcast/hazelcast/master/kubernetes-rbac.yaml
 ----
 
 Then, update the WAN Replication configuration in publisher/hazelcast.yaml with the external IP of the Receiver cluster.
@@ -107,7 +107,7 @@ Again, we need to create a secret with the Hazelcast Enterprise license key.
 
 [source, shell]
 ----
-(Receiver) $ kubectl create secret generic hz-license-key --from-literal license=<hz-license-key>
+(Publisher) $ kubectl create secret generic hz-license-key --from-literal key=<hz-license-key>
 ----
 
 Finally, we can start the publisher Hazelcast cluster.
@@ -123,25 +123,60 @@ Your two Hazelcast clusters are set up with the WAN Replication. Now, we can che
 
 Insert data into the publisher Hazelcast cluster
 
-[source, shell]
+NOTE: Before using CLC, it should be installed in your system. Check the installation instructions for CLC: xref:clc:ROOT:install-clc.adoc[].
+
+Run the following command for adding the publisher cluster config to the CLC.
+
+[source, bash]
 ----
-(Publisher) $ kubectl exec -it hazelcast-0 -- /bin/bash
-# java -cp lib/hazelcast-enterprise-all*.jar com.hazelcast.client.console.ClientConsoleApp
-hazelcast[default] > ns rep
-namespace: rep
-hazelcast[rep] > m.put key value
-null
+clc config add hz-publisher cluster.name=dev cluster.address=<PUBLISHER-CLUSTER-EXTERNAL-IP>
+----
+
+Run the following command for inserting data into the map called `rep`
+
+[source, bash]
+----
+for i in {1..10};
+do
+   clc -c hz-publisher map set --name rep key-$i value-$i;
+done
 ----
 
 Check that the data was replicated to the receiver Hazelcast cluster.
 
+Run the following command for adding the receiver cluster config to the CLC.
+
+[source, bash]
+----
+clc config add hz-receiver cluster.name=dev cluster.address=<RECEIVER-CLUSTER-EXTERNAL-IP>
+----
+
+Run the following command for checking the corresponding map's size.
+
+[source, bash]
+----
+clc -c hz-receiver map size --name rep
+----
+
+== 4. Clean up
+
+To delete all created resources, execute the following commands.
+
+(Receiver)
 [source, shell]
 ----
-(Receiver) $ kubectl exec -it hazelcast-0 -- /bin/bash
-# java -cp lib/hazelcast-enterprise-all*.jar com.hazelcast.client.console.ClientConsoleApp
-hazelcast[default] > ns rep
-hazelcast[rep] > m.get key
-value
+kubectl delete -f https://raw.githubusercontent.com/hazelcast/hazelcast/master/kubernetes-rbac.yaml
+kubectl delete secret hz-license-key
+kubectl delete -f receiver/statefulset.yaml
+----
+
+(Publisher)
+[source, shell]
+----
+kubectl delete -f https://raw.githubusercontent.com/hazelcast/hazelcast/master/kubernetes-rbac.yaml
+kubectl delete secret hz-license-key
+kubectl delete configmap hazelcast-configuration
+kubectl delete -f publisher/statefulset.yaml
 ----
 
 == Summary
