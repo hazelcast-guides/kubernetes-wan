@@ -15,16 +15,16 @@ spec:
     spec:
       containers:
         - name: hazelcast
-          image: hazelcast/hazelcast-enterprise:4.1
-          imagePullPolicy: IfNotPresent
+          image: hazelcast/hazelcast-enterprise:latest
+          imagePullPolicy: Always
           ports:
           - containerPort: 5701
           env:
-          - name: HZ_LICENSE_KEY
+          - name: HZ_LICENSEKEY
             valueFrom:
               secretKeyRef:
                 name: hz-license-key
-                key: license
+                key: key
 ---
 
 apiVersion: v1
